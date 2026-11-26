@@ -38,12 +38,12 @@ def trim(im, thr=242):
     return im.crop(b) if b else im
 
 
-def fit(im, w, h, zoom=1.0):
+def fit(im, w, h, zoom=1.0, contain=False):
     """여백 제거 후, 비율이 비슷하면 꽉 채우고 아니면 흰 배경에 여유 있게 담음."""
     im = trim(im); r = (im.width / im.height) / (w / h)
-    if 0.6 <= r <= 1.8:
+    if not contain and 0.6 <= r <= 1.8:
         return cover(im, w, h, zoom)
-    s = min((w - 80) / im.width, (h - 80) / im.height) * zoom
+    s = min((w - 200) / im.width, (h - 120) / im.height) * zoom
     r = im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
     out = Image.new("RGB", (w, h), (255, 255, 255)); out.paste(r, ((w - r.width) // 2, (h - r.height) // 2))
     return out
@@ -74,7 +74,8 @@ def draw_lines(d, lines, hl, y, size, W, maxw):
 class Card:
     """한 장: 사진 영역 + 글자 레이어. kind = video | carousel"""
 
-    def __init__(self, kind, image, text, hl, big, idx, n):
+    def __init__(self, kind, image, text, hl, big, idx, n, contain=False):
+        self.contain = contain
         self.kind, self.idx, self.n = kind, idx, n
         self.W, self.H = (1080, 1920) if kind == "video" else (1080, 1350)
         self.box = (0, 700, 1080, 1780) if kind == "video" else (0, 430, 1080, 1350)
@@ -117,7 +118,7 @@ class Card:
         x0, y0, x1, y1 = self.box
         base = Image.new("RGB", (self.W, self.H), BG)
         zoom = 1.0 if t is None else 1.0 + 0.06 * (t / dur)
-        base.paste(fit(self.src, x1 - x0, y1 - y0, zoom), (x0, y0))
+        base.paste(fit(self.src, x1 - x0, y1 - y0, zoom, self.contain), (x0, y0))
         if not hasattr(self, "_txt"):
             self._txt, self._chrome = self.text_layer(), self.chrome_layer()
         base.paste(self._chrome, (0, 0), self._chrome)
@@ -131,11 +132,11 @@ class Card:
 
 
 def cards(spec, kind):
-    s = spec["slides"]; items = [(spec.get("hook_image", s[0]["image"]), spec["hook"], spec.get("hl"), True)]
-    items += [(x["image"], x["caption"], x.get("hl"), False) for x in s]
+    s = spec["slides"]; items = [(spec.get("hook_image", s[0]["image"]), spec["hook"], spec.get("hl"), True, False)]
+    items += [(x["image"], x["caption"], x.get("hl"), False, x.get("contain", False)) for x in s]
     if spec.get("cta"):
-        items.append((spec.get("cta_image", s[0]["image"]), spec["cta"], spec.get("cta_hl"), True))
-    return [Card(kind, im, tx, hl, big, i, len(items)) for i, (im, tx, hl, big) in enumerate(items)]
+        items.append((spec.get("cta_image", s[0]["image"]), spec["cta"], spec.get("cta_hl"), True, False))
+    return [Card(kind, im, tx, hl, big, i, len(items), ct) for i, (im, tx, hl, big, ct) in enumerate(items)]
 
 
 def video(spec, out):

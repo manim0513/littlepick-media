@@ -2,7 +2,7 @@
 """Threads 게시: 본문(+영상/이미지) 게시 후 본인 답글로 링크 게시.
 토큰은 클라우드 환경의 네트워크 시크릿이 graph.threads.net 요청에 자동으로 붙임(코드에 토큰 없음).
 사용: threads_post.py post.json
-post.json: {"text": "...", "video_url": "https://..." | "image_url": "https://...", "reply": "..."}
+post.json: {"text": "...", "video_url": "https://..." | "image_url": "https://..." | "carousel": ["https://...jpg", ...], "reply": "..."}
 """
 import json, subprocess, sys, time
 
@@ -35,7 +35,15 @@ def publish(params):
 
 def run(p):
     main_params = {"text": p["text"]}
-    if p.get("video_url"):
+    if p.get("carousel"):  # 이미지 2~20장
+        kids = []
+        for url in p["carousel"]:
+            cid = call("POST", "me/threads", media_type="IMAGE", image_url=url, is_carousel_item="true")["id"]
+            kids.append(cid)
+        for cid in kids:
+            wait_ready(cid)
+        main_params.update(media_type="CAROUSEL", children=",".join(kids))
+    elif p.get("video_url"):
         main_params.update(media_type="VIDEO", video_url=p["video_url"])
     elif p.get("image_url"):
         main_params.update(media_type="IMAGE", image_url=p["image_url"])
