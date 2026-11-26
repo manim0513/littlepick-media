@@ -9,9 +9,7 @@ import json, subprocess, sys, time
 API = "https://graph.threads.net/v1.0"
 
 def call(method, path, **params):
-    cmd = ["curl", "-s", "-X", method, f"{API}/{path}"]
-    if method == "GET":
-        cmd[3:3] = ["-G"]
+    cmd = ["curl", "-s", "-G" if method == "GET" else "-XPOST", f"{API}/{path}"]
     for k, v in params.items():
         cmd += ["--data-urlencode", f"{k}={v}"]
     r = json.loads(subprocess.run(cmd, capture_output=True, text=True, check=True).stdout)
