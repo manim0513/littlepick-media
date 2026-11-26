@@ -33,8 +33,7 @@ def publish(params):
     wait_ready(cid)
     return call("POST", "me/threads_publish", creation_id=cid)["id"]
 
-def main(path):
-    p = json.load(open(path))
+def run(p):
     main_params = {"text": p["text"]}
     if p.get("video_url"):
         main_params.update(media_type="VIDEO", video_url=p["video_url"])
@@ -48,7 +47,7 @@ def main(path):
         time.sleep(10)
         reply_id = publish({"media_type": "TEXT", "text": p["reply"], "reply_to_id": post_id})
     link = call("GET", post_id, fields="permalink").get("permalink")
-    print(json.dumps({"post_id": post_id, "reply_id": reply_id, "permalink": link}, ensure_ascii=False))
+    return {"post_id": post_id, "reply_id": reply_id, "permalink": link}
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    print(json.dumps(run(json.load(open(sys.argv[1]))), ensure_ascii=False))
