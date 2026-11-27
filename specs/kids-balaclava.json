@@ -1,0 +1,34 @@
+{
+ "hook": "올겨울 애들 방한템\n요즘은 바라클라바",
+ "hl": "바라클라바",
+ "hook_image": "/home/user/littlepick-media/.cache/kids-balaclava/1.img",
+ "slides": [
+  {
+   "image": "/home/user/littlepick-media/.cache/kids-balaclava/3.img",
+   "caption": "코까지 올리면\n얼굴 전체 커버",
+   "hl": "얼굴 전체",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/kids-balaclava/6.img",
+   "caption": "내리면 후드처럼\n귀까지 따뜻",
+   "hl": "후드처럼",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/kids-balaclava/9.img",
+   "caption": "끈 조절로\n얼굴에 딱 맞게",
+   "hl": "끈 조절",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/kids-balaclava/8.img",
+   "caption": "안쪽 이중 기모",
+   "hl": "이중 기모",
+   "contain": false
+  }
+ ],
+ "cta": "목도리보다 안 풀려서 편함\n링크는 댓글에",
+ "cta_hl": "댓글",
+ "cta_image": "/home/user/littlepick-media/.cache/kids-balaclava/11.img"
+}

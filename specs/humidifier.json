@@ -1,0 +1,28 @@
+{
+ "hook": "가습기 살 때\n이거 안 보면 후회함",
+ "hl": "후회함",
+ "hook_image": "/home/user/littlepick-media/.cache/humidifier/3.img",
+ "slides": [
+  {
+   "image": "/home/user/littlepick-media/.cache/humidifier/4.img",
+   "caption": "통째로 분리돼서\n구석구석 세척 가능",
+   "hl": "통째로 분리",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/humidifier/6.img",
+   "caption": "위에서 물 붓는\n상부 급수",
+   "hl": "상부 급수",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/humidifier/1.img",
+   "caption": "5L 대용량이라\n밤새 물 걱정 덜함",
+   "hl": "5L 대용량",
+   "contain": false
+  }
+ ],
+ "cta": "아기방 가습기 랭킹 1위\n링크는 댓글에",
+ "cta_hl": "댓글",
+ "cta_image": "/home/user/littlepick-media/.cache/humidifier/2.img"
+}

@@ -1,0 +1,34 @@
+{
+ "hook": "밤마다 이불 차는 아기\n이불 대신 이거 입혀",
+ "hl": "이불 대신",
+ "hook_image": "/home/user/littlepick-media/.cache/sleep-vest/4.img",
+ "slides": [
+  {
+   "image": "/home/user/littlepick-media/.cache/sleep-vest/1.img",
+   "caption": "입는 이불이라\n차도 안 벗겨져",
+   "hl": "입는 이불",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/sleep-vest/7.img",
+   "caption": "3중 거즈라\n포근한데 답답하지 않게",
+   "hl": "3중 거즈",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/sleep-vest/8.img",
+   "caption": "옆트임 끈이라\n입히고 벗기기 쉬움",
+   "hl": "입히고 벗기기",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/sleep-vest/10.img",
+   "caption": "낮엔 실내 조끼로\n입혀도 귀여움",
+   "hl": "실내 조끼",
+   "contain": false
+  }
+ ],
+ "cta": "요즘 많이 찾는 수면조끼\n링크는 댓글에",
+ "cta_hl": "댓글",
+ "cta_image": "/home/user/littlepick-media/.cache/sleep-vest/5.img"
+}
