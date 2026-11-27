@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""인스타 댓글 키워드 → 쿠팡 링크 DM 자동 발송 (Private Replies).
+"""인스타 댓글 → 쿠팡 링크 DM 자동 발송 (Private Replies).
 
-ig/posts/*/post.json 의 dm_keyword, coupang_link 와 result.json 의 media_id 를 보고
-최근 7일 안에 게시한 릴스의 댓글 중 키워드가 들어간 댓글 작성자에게 DM 1회를 보냄.
+ig/posts/*/post.json 의 coupang_link 와 result.json 의 media_id 를 보고
+최근 7일 안에 달린 댓글(하트·이모지 등 아무 댓글)의 작성자에게 DM 1회를 보냄.
+같은 사람이 같은 게시물에 여러 번 댓글을 달아도 DM은 1번만 보냄.
+post.json 에 dm_keyword 가 있으면 그 단어가 들어간 댓글에만 보냄(선택).
 보낸 댓글은 ig/dm_state.json 에 기록해 중복 발송을 막음.
 인스타 규칙: 댓글 1개당 DM 1회, 댓글 작성 후 7일 이내만 가능.
 토큰은 네트워크 시크릿이 graph.instagram.com 요청에 자동으로 붙임(코드에 토큰 없음).
@@ -16,7 +18,7 @@ STATE = f"{ROOT}/ig/dm_state.json"
 WINDOW = datetime.timedelta(days=7)
 DRY = "--dry-run" in sys.argv
 
-MSG = ("댓글 고마워! 말한 링크 여기 있어 👇\n{link}\n\n"
+MSG = ("댓글 고마워! 링크 여기 있어 👇\n{link}\n\n"
        "(쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받아)")
 
 
@@ -59,6 +61,7 @@ def main():
     uid, myname = me["user_id"], me.get("username")
 
     sent, skipped, errors = [], 0, []
+    done_users = {(v.get("media"), v.get("user")) for v in state["replied"].values()}
     for d in sorted(glob.glob(f"{ROOT}/ig/posts/*/")):
         try:
             post = json.load(open(f"{d}post.json"))
@@ -66,7 +69,7 @@ def main():
         except FileNotFoundError:
             continue
         kw, link, mid = post.get("dm_keyword"), post.get("coupang_link"), res.get("media_id")
-        if not (kw and link and mid):
+        if not (link and mid):
             continue
         comments = get_all(f"{mid}/comments", fields="id,text,timestamp,from,username", limit=50)
         for c in comments:
@@ -74,9 +77,11 @@ def main():
             who = (c.get("from") or {}).get("username") or c.get("username")
             if cid in state["replied"] or who == myname:
                 continue
+            if (mid, who) in done_users:
+                continue
             if now - ts(c["timestamp"]) > WINDOW:
                 continue
-            if norm(kw) not in norm(c.get("text", "")):
+            if kw and norm(kw) not in norm(c.get("text", "")):
                 skipped += 1
                 continue
             body = {"recipient": {"comment_id": cid}, "message": {"text": MSG.format(link=link)}}
@@ -85,9 +90,10 @@ def main():
             try:
                 r = curl(["-XPOST", f"{API}/{uid}/messages", "-H", "Content-Type: application/json",
                           "-d", json.dumps(body, ensure_ascii=False)])
-                state["replied"][cid] = {"user": who, "keyword": kw, "at": now.isoformat(timespec="seconds"),
+                state["replied"][cid] = {"user": who, "media": mid, "at": now.isoformat(timespec="seconds"),
                                          "message_id": r.get("message_id")}
                 sent.append({"comment": cid, "user": who})
+                done_users.add((mid, who))
             except RuntimeError as e:
                 errors.append({"comment": cid, "error": str(e)})
                 if "permission" in str(e).lower():
@@ -95,7 +101,7 @@ def main():
 
     if not DRY:
         json.dump(state, open(STATE, "w"), ensure_ascii=False, indent=1)
-    print(json.dumps({"sent": sent, "no_keyword": skipped, "errors": errors}, ensure_ascii=False))
+    print(json.dumps({"sent": sent, "skipped": skipped, "errors": errors}, ensure_ascii=False))
 
 
 if __name__ == "__main__":

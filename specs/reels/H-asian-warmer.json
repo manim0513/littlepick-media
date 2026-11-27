@@ -4,5 +4,5 @@
 {"image":"images-src/carrier-warmer/2.jpg","beats":4,"layout":"card","move":"punch","flash":true,"text":"아기띠 위에 덮는\n워머 하나면 해결","hl":"덮는"},
 {"image":"images-src/carrier-warmer/3.jpg","beats":3,"layout":"card","move":"left","text":"후드까지 있어서 바람 OK","hl":"후드"},
 {"image":"images-src/carrier-warmer/4.jpg","beats":3,"layout":"card","move":"in","text":"눈 와도 물방울 맺히는 겉감","hl":"물방울"},
-{"video":"clips/dad-dance.mp4","start":4,"beats":5,"move":"out","text":"겨울 외출 필수템\n댓글에 '워머' 남기면\n링크 보내줄게","hl":"'워머'","big":true}
+{"video":"clips/dad-dance.mp4","start":4,"beats":5,"move":"out","text":"겨울 외출 필수템\n댓글 남기면\n링크 DM으로 보내줄게","hl":"댓글","big":true}
 ]}
