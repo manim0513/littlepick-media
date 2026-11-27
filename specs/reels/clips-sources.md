@@ -1,0 +1,11 @@
+# 영상 클립 출처 (Pexels 라이선스: 상업적 무료 이용·편집 가능, 출처 표기 의무 없음)
+- tantrum: https://www.pexels.com/video/boy-having-tantrums-6623021/
+- tie-shoes2: https://www.pexels.com/video/woman-tying-shoelace-of-child-4860328/
+- child-snow: https://www.pexels.com/video/child-walking-on-snow-10956008/
+- snow-walk: https://www.pexels.com/video/mother-and-child-walking-on-the-snow-6235397/
+- pine-child: https://www.pexels.com/video/a-woman-touching-a-snow-covered-pine-tree-with-her-child-6235391/
+- mom-kiss: https://www.pexels.com/video/a-mother-kissing-her-baby-6235396/
+- crying-toddler: https://www.pexels.com/video/crying-toddler-6391705/
+- lotion-dispense: https://www.pexels.com/video/close-up-of-a-person-dispensing-lotion-9335887/
+- lotion-palm: https://www.pexels.com/video/a-person-rubbing-a-cream-on-it-s-palm-9335890/
+- baby-held: https://www.pexels.com/video/a-baby-being-held-by-a-woman-in-a-blue-shirt-16270511/

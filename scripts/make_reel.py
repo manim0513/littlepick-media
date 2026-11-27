@@ -13,6 +13,7 @@ spec.json:
      "move": "in" | "out" | "left" | "right" | "punch",
      "text": "자막\n두 줄", "hl": "강조",     # 형광 강조
      "pos": "top" | "mid" | "low",
+     "video": "clip.mp4", "start": 1.5, "speed": 1.0,   # image 대신 영상 클립(무료 스톡) 사용 가능
      "tag": "1",                               # 리스트 번호 배지(선택)
      "big": true, "dark": true,                # 큰 글씨 / 사진 어둡게
      "shake": true, "flash": true}             # 흔들림 / 흰 번쩍(컷 시작)
@@ -58,6 +59,29 @@ def base_plate(shot):
     if shot.get("dark"):
         plate = ImageEnhance.Brightness(plate).enhance(0.6)
     return plate
+
+
+def clip_frames(shot, dur):
+    """영상 클립(무료 상업용 스톡)을 1.25배 크기 프레임으로 하나씩 꺼냄. shot: video, start, speed."""
+    BW, BH = int(W * 1.25), int(H * 1.25)
+    sp = shot.get("speed", 1.0)
+    vf = (f"setpts=PTS/{sp},fps={FPS},scale={BW}:{BH}:force_original_aspect_ratio=increase,crop={BW}:{BH},"
+          f"eq=saturation=1.08:contrast=1.04")
+    pr = subprocess.Popen(["ffmpeg", "-loglevel", "quiet", "-ss", str(shot.get("start", 0)), "-i", shot["video"],
+                           "-t", str((dur + 0.5) * sp), "-vf", vf, "-an", "-f", "rawvideo", "-pix_fmt", "rgb24", "-"],
+                          stdout=subprocess.PIPE)
+    n = BW * BH * 3; last = None
+    while True:
+        b = pr.stdout.read(n)
+        if len(b) < n:
+            break
+        last = Image.frombytes("RGB", (BW, BH), b)
+        if shot.get("dark"):
+            last = ImageEnhance.Brightness(last).enhance(0.6)
+        yield last
+    pr.wait()
+    while last is not None:  # 클립이 짧으면 마지막 프레임 유지
+        yield last
 
 
 def camera(plate, shot, p, t):
@@ -198,13 +222,14 @@ def main(spec_path, out):
                           "-crf", "20", "-preset", "medium", vtmp], stdin=subprocess.PIPE)
     frame_no = 0; start = 0.0; cuts, pops = [], []
     for s, dur in zip(shots, durs):
-        plate = base_plate(s); txt = text_layer(s)
+        frames = clip_frames(s, dur) if s.get("video") else None
+        plate = None if frames else base_plate(s); txt = text_layer(s)
         if start > 0: cuts.append(start)
         if s.get("text") or s.get("tag"): pops.append(start + 0.02)
         end_frame = round((start + dur) * FPS)
         while frame_no < end_frame:
             t = max(0.0, frame_no / FPS - start); pr = t / dur
-            fr = camera(plate, s, pr, t).convert("RGBA")
+            fr = camera(next(frames) if frames else plate, s, pr, t).convert("RGBA")
             lay, _ = pop(txt, t); fr.alpha_composite(lay)
             fr = fr.convert("RGB")
             if s.get("flash") and t < 0.12:

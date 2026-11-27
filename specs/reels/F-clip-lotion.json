@@ -1,0 +1,8 @@
+{"bpm":112,"shots":[
+{"video":"clips/crying-toddler.mp4","start":1.5,"beats":3,"move":"punch","shake":true,"text":"겨울만 되면\n애기 피부 푸석푸석","hl":"푸석푸석","big":true,"pos":"mid"},
+{"video":"clips/lotion-dispense.mp4","start":1,"beats":3,"move":"in","text":"로션 하루에 몇 번 발라?","hl":"몇 번"},
+{"video":"clips/lotion-palm.mp4","start":2,"beats":2,"move":"in","text":"작은 통은 금방 바닥남","hl":"금방 바닥"},
+{"image":"images-src/baby-lotion/2.jpg","beats":3,"layout":"card","move":"punch","flash":true,"text":"400ml 펌프형이면\n애 잡고 한 손으로 쭉","hl":"한 손으로"},
+{"video":"clips/baby-held.mp4","start":0,"beats":3,"move":"in","text":"자기 전에 듬뿍\n발라주기 좋음","hl":"듬뿍"},
+{"image":"images-src/baby-lotion/5.jpg","beats":4,"layout":"card","move":"out","text":"가격은 만원대 초반\n댓글에 '로션' 남기면\n링크 보내줄게","hl":"'로션'","big":true}
+]}
