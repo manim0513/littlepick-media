@@ -5,7 +5,8 @@
 
 spec.json:
 {
-  "bpm": 112,
+  "bpm": 112,                                  # 음원 템포에 맞추면 컷이 박자에 떨어짐
+  "music": {"file": "track.mp3", "start": 17.8, "volume": 1.0},   # 무료 음원(Pixabay 등). 없으면 자체 합성음
   "shots": [
     {"image": "path", "beats": 2,              # 컷 길이(박자 수)
      "layout": "full" | "card",                # full=화면 꽉, card=흐린 배경 위 사진
@@ -164,7 +165,7 @@ def env(n, a=0.005, d=0.2):
     return np.minimum(1, t / a) * np.exp(-t / d)
 
 
-def synth(total, bpm, cuts, pops):
+def synth(total, bpm, cuts, pops, sfx_only=False):
     n = int(total * SR) + SR; out = np.zeros(n)
     beat = 60 / bpm
     def add(sig, at, g=1.0):
@@ -184,7 +185,7 @@ def synth(total, bpm, cuts, pops):
         tt = np.arange(int(dur * SR)) / SR
         s = np.sin(2 * np.pi * fr * tt) + 0.35 * np.sin(4 * np.pi * fr * tt) + 0.12 * np.sin(6 * np.pi * fr * tt)
         return s * env(len(tt), 0.004, d)
-    nb = int(total / beat) + 2
+    nb = 0 if sfx_only else int(total / beat) + 2
     for b in range(nb):
         at = b * beat; bar = (b // 4) % 4
         add(kick, at, 0.9 if b % 2 == 0 else 0.5)
@@ -238,9 +239,18 @@ def main(spec_path, out):
         start += dur
     p.stdin.close(); p.wait()
     with wave.open(atmp, "wb") as w:
-        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes(synth(total, bpm, cuts, pops).tobytes())
-    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", vtmp, "-i", atmp, "-c:v", "copy", "-c:a", "aac",
-                    "-b:a", "160k", "-shortest", "-movflags", "+faststart", out], check=True)
+        w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes(synth(total, bpm, cuts, pops, bool(spec.get("music"))).tobytes())
+    music = spec.get("music")
+    if music:  # 무료 음원(상업적 이용 가능) + 효과음 섞기
+        f = f"atrim=start={music.get('start', 0)}:duration={total:.3f},asetpts=PTS-STARTPTS," \
+            f"afade=t=in:d=0.08,afade=t=out:st={total - 0.7:.3f}:d=0.7,volume={music.get('volume', 1.0)}"
+        fc = f"[1:a]{f}[m];[2:a]volume=0.35[s];[m][s]amix=inputs=2:normalize=0,loudnorm=I=-14:TP=-1.5[a]"
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", vtmp, "-i", music["file"], "-i", atmp,
+                        "-filter_complex", fc, "-map", "0:v", "-map", "[a]", "-c:v", "copy", "-c:a", "aac",
+                        "-b:a", "160k", "-ar", "44100", "-shortest", "-movflags", "+faststart", out], check=True)
+    else:
+        subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", vtmp, "-i", atmp, "-c:v", "copy", "-c:a", "aac",
+                        "-b:a", "160k", "-shortest", "-movflags", "+faststart", out], check=True)
 
 
 if __name__ == "__main__":
