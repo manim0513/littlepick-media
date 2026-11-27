@@ -1,0 +1,8 @@
+{"bpm":112,"shots":[
+{"video":"clips/tantrum.mp4","start":0.5,"beats":3,"move":"punch","shake":true,"text":"POV: 등원 5분 전\n신발 안 신겠다는 애","hl":"5분 전","big":true,"pos":"mid"},
+{"video":"clips/tie-shoes2.mp4","start":9,"beats":3,"move":"in","text":"신발 신기기만\n10분째","hl":"10분째","big":true},
+{"image":"images-src/kids-padding-boots/2.jpg","beats":3,"layout":"card","move":"punch","flash":true,"text":"그래서 요즘 많이 찾는 게\n벨크로 방한화","hl":"벨크로"},
+{"image":"images-src/kids-padding-boots/3.jpg","beats":2,"layout":"card","move":"in","text":"혼자 쏙 + 안쪽까지 도톰","hl":"혼자 쏙"},
+{"video":"clips/child-snow.mp4","start":2,"beats":3,"move":"in","text":"눈 오는 날 등원도\n이거면 끝","hl":"이거면 끝"},
+{"image":"images-src/kids-padding-boots/6.jpg","beats":4,"layout":"card","move":"out","text":"유아 방한화 랭킹 1위\n댓글에 '신발' 남기면\n링크 보내줄게","hl":"'신발'","big":true}
+]}

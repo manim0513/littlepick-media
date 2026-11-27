@@ -1,0 +1,10 @@
+{"bpm":112,"shots":[
+{"image":"images-src/baby-lotion/1.jpg","beats":3,"layout":"full","focus":0.8,"move":"punch","shake":true,"dark":true,"text":"몰랐는데 겨울에\n진짜 필요했던\n육아템 3개","hl":"진짜 필요했던","big":true,"pos":"mid"},
+{"image":"images-src/carrier-warmer/2.jpg","beats":2,"layout":"card","move":"in","flash":true,"tag":"1","text":"아기띠 위에 덮는 워머"},
+{"image":"images-src/carrier-warmer/3.jpg","beats":2,"layout":"card","move":"left","tag":"1","text":"후드까지 있어서\n바람 불어도 OK","hl":"후드"},
+{"image":"images-src/kids-padding-boots/2.jpg","beats":2,"layout":"card","move":"in","flash":true,"tag":"2","text":"혼자 신는 벨크로 방한화"},
+{"image":"images-src/kids-padding-boots/3.jpg","beats":2,"layout":"card","move":"right","tag":"2","text":"안쪽까지 도톰","hl":"도톰"},
+{"image":"images-src/baby-lotion/2.jpg","beats":2,"layout":"card","move":"in","flash":true,"tag":"3","text":"한 손 펌프 대용량 로션"},
+{"image":"images-src/baby-lotion/3.jpg","beats":2,"layout":"card","move":"left","tag":"3","text":"400ml라 콸콸 써도 넉넉","hl":"400ml"},
+{"image":"images-src/baby-lotion/5.jpg","beats":4,"layout":"card","move":"out","text":"3개 다 궁금하면\n댓글에 '겨울' 남겨줘","hl":"'겨울'","big":true}
+]}

@@ -1,0 +1,62 @@
+{
+"bpm": 117,
+"music": {
+"file": "music/b-happyday.mp3",
+"start": 17.79
+},
+"shots": [
+{
+"video": "clips/girl-tie.mp4",
+"start": 1.5,
+"beats": 4,
+"move": "punch",
+"shake": true,
+"text": "POV: 등원 5분 전\n아직도 신발 끈 묶는 중",
+"hl": "5분 전",
+"big": true,
+"pos": "mid"
+},
+{
+"image": "images-src/kids-padding-boots/2.jpg",
+"beats": 3,
+"layout": "card",
+"move": "punch",
+"flash": true,
+"text": "그래서 요즘 많이 찾는 게\n벨크로 방한화",
+"hl": "벨크로"
+},
+{
+"image": "images-src/kids-padding-boots/3.jpg",
+"beats": 2,
+"layout": "card",
+"move": "in",
+"text": "혼자 쏙 + 안쪽까지 도톰",
+"hl": "혼자 쏙"
+},
+{
+"image": "images-src/kids-padding-boots/4.jpg",
+"beats": 2,
+"layout": "card",
+"move": "punch",
+"text": "한 짝 167g이라\n애들도 안 무거워함",
+"hl": "167g"
+},
+{
+"video": "clips/ice-rink.mp4",
+"start": 4,
+"beats": 3,
+"move": "in",
+"text": "추운 날 나들이도\n이거면 끝",
+"hl": "이거면 끝"
+},
+{
+"image": "images-src/kids-padding-boots/6.jpg",
+"beats": 4,
+"layout": "card",
+"move": "out",
+"text": "유아 방한화 랭킹 1위\n댓글 남기면\n링크 DM으로 보내줄게",
+"hl": "댓글",
+"big": true
+}
+]
+}

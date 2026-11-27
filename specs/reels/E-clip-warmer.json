@@ -1,0 +1,8 @@
+{"bpm":112,"shots":[
+{"video":"clips/snow-walk.mp4","start":0.3,"beats":3,"move":"punch","shake":true,"text":"아기띠 겨울 산책\n애기 다리 안 추워?","hl":"안 추워?","big":true,"pos":"mid"},
+{"video":"clips/pine-child.mp4","start":4,"beats":3,"move":"in","text":"패딩 입히면 아기띠가 안 맞고\n안 입히면 춥고","hl":"안 맞고"},
+{"image":"images-src/carrier-warmer/2.jpg","beats":3,"layout":"card","move":"punch","flash":true,"text":"아기띠 위에 덮는\n워머 하나면 해결","hl":"덮는"},
+{"image":"images-src/carrier-warmer/3.jpg","beats":2,"layout":"card","move":"left","text":"후드까지 있어서 바람 OK","hl":"후드"},
+{"image":"images-src/carrier-warmer/4.jpg","beats":2,"layout":"card","move":"in","text":"눈 와도 물방울 맺히는 겉감","hl":"물방울"},
+{"video":"clips/mom-kiss.mp4","start":3,"beats":4,"move":"out","text":"겨울 산책 필수템\n댓글에 '워머' 남기면\n링크 보내줄게","hl":"'워머'","big":true}
+]}
