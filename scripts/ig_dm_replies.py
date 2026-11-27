@@ -7,12 +7,13 @@ ig/posts/*/post.json 의 coupang_link 와 result.json 의 media_id 를 보고
 post.json 에 dm_keyword 가 있으면 그 단어가 들어간 댓글에만 보냄(선택).
 보낸 댓글은 ig/dm_state.json 에 기록해 중복 발송을 막음.
 인스타 규칙: 댓글 1개당 DM 1회, 댓글 작성 후 7일 이내만 가능.
-토큰은 네트워크 시크릿이 graph.instagram.com 요청에 자동으로 붙임(코드에 토큰 없음).
+토큰은 네트워크 시크릿이 graph.facebook.com 요청에 자동으로 붙임(코드에 토큰 없음).
 사용: ig_dm_replies.py [--dry-run]
 """
 import datetime, glob, json, os, subprocess, sys
 
-API = "https://graph.instagram.com/v23.0"
+API = "https://graph.facebook.com/v23.0"
+IG_ID = "17841415991773293"  # @littlepicks.life
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATE = f"{ROOT}/ig/dm_state.json"
 WINDOW = datetime.timedelta(days=7)
@@ -57,8 +58,8 @@ def norm(s):
 def main():
     now = datetime.datetime.now(datetime.timezone.utc)
     state = json.load(open(STATE)) if os.path.exists(STATE) else {"replied": {}}
-    me = get("me", fields="user_id,username")
-    uid, myname = me["user_id"], me.get("username")
+    me = get(IG_ID, fields="id,username")
+    uid, myname = IG_ID, me.get("username")
 
     sent, skipped, errors = [], 0, []
     done_users = {(v.get("media"), v.get("user")) for v in state["replied"].values()}

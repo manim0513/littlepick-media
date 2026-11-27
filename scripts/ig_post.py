@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""인스타그램 릴스 게시 (Instagram API, Instagram 로그인 방식).
-토큰은 클라우드 환경의 네트워크 시크릿이 graph.instagram.com 요청에 자동으로 붙임(코드에 토큰 없음).
+"""인스타그램 릴스 게시 (Instagram API, 통합 로그인 토큰 EAA… → graph.facebook.com).
+토큰은 클라우드 환경의 네트워크 시크릿이 graph.facebook.com 요청에 자동으로 붙임(코드에 토큰 없음).
 사용: ig_post.py post.json
 post.json: {"caption": "...", "video_url": "https://...mp4", "cover_url": "https://...jpg"(선택), "share_to_feed": true}
 """
 import json, subprocess, sys, time
 
-API = "https://graph.instagram.com/v23.0"
+API = "https://graph.facebook.com/v23.0"
+IG_ID = "17841415991773293"  # @littlepicks.life 인스타 계정 ID (앱 대시보드 > 액세스 토큰 생성)
 
 
 def call(method, path, **params):
@@ -32,8 +33,7 @@ def wait_ready(cid, timeout=600):
 
 
 def run(p):
-    me = call("GET", "me", fields="user_id,username")
-    uid = me["user_id"]
+    uid = IG_ID
     params = {"media_type": "REELS", "video_url": p["video_url"], "caption": p["caption"],
               "share_to_feed": "true" if p.get("share_to_feed", True) else "false"}
     if p.get("cover_url"):
@@ -42,7 +42,7 @@ def run(p):
     wait_ready(cid)
     mid = call("POST", f"{uid}/media_publish", creation_id=cid)["id"]
     link = call("GET", mid, fields="permalink").get("permalink")
-    return {"media_id": mid, "permalink": link, "username": me.get("username")}
+    return {"media_id": mid, "permalink": link}
 
 
 if __name__ == "__main__":
