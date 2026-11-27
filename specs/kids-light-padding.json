@@ -1,0 +1,34 @@
+{
+ "hook": "곰돌이 귀 달린\n유아 경량패딩",
+ "hl": "곰돌이 귀",
+ "hook_image": "/home/user/littlepick-media/.cache/kids-light-padding/1.img",
+ "slides": [
+  {
+   "image": "/home/user/littlepick-media/.cache/kids-light-padding/2.img",
+   "caption": "가벼워서\n입고 뛰어다니기 편함",
+   "hl": "가벼워서",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/kids-light-padding/3.img",
+   "caption": "후드에 귀가 쏙\n사진 찍으면 귀여움 끝",
+   "hl": "귀가 쏙",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/kids-light-padding/5.img",
+   "caption": "반짝이는 샤이니 원단\n색은 여러 가지",
+   "hl": "샤이니",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/kids-light-padding/6.img",
+   "caption": "파스텔 컬러도 있음",
+   "hl": "파스텔",
+   "contain": false
+  }
+ ],
+ "cta": "유아 경량패딩 랭킹 1위\n링크는 댓글에",
+ "cta_hl": "댓글",
+ "cta_image": "/home/user/littlepick-media/.cache/kids-light-padding/4.img"
+}

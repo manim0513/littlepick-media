@@ -1,0 +1,28 @@
+{
+ "hook": "크리스마스 선물 고민이면\n요즘 이거 많이 사더라",
+ "hl": "많이 사더라",
+ "hook_image": "/home/user/littlepick-media/.cache/fishing-toy/2.img",
+ "slides": [
+  {
+   "image": "/home/user/littlepick-media/.cache/fishing-toy/1.img",
+   "caption": "버튼 하나 누르면\n판이 빙글빙글",
+   "hl": "빙글빙글",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/fishing-toy/3.img",
+   "caption": "자석 낚싯대라\n대기만 하면 착",
+   "hl": "자석 낚싯대",
+   "contain": false
+  },
+  {
+   "image": "/home/user/littlepick-media/.cache/fishing-toy/11.img",
+   "caption": "핑크 · 블루\n두 가지 색",
+   "hl": "두 가지",
+   "contain": false
+  }
+ ],
+ "cta": "쿠팡 크리스마스 선물 랭킹 1위\n링크는 댓글에",
+ "cta_hl": "댓글",
+ "cta_image": "/home/user/littlepick-media/.cache/fishing-toy/9.img"
+}
